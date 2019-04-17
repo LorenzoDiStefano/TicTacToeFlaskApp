@@ -38,11 +38,11 @@ def query_game_sessions():
 @app.route("/delete_game_rooms")
 @login_required
 def delete_game_rooms():
-    # if(current_user.administrator==False):
-    #     return jsonify("acces denied")
+    if(current_user.administrator==False):
+        return jsonify("acces denied")
     ongoing= db.session.query(GameRoom)
     for i in ongoing:
-        # must be delete rooms one by one or it will leave game data connected to them
+        # must be delete rooms one by one or the cascade will not work
         db.session.delete(i)
     db.session.commit()
     return jsonify("deleted all")
@@ -51,8 +51,8 @@ def delete_game_rooms():
 @app.route("/delete_game_sessions")
 @login_required
 def delete_game_sessions():
-    # if(current_user.administrator==False):
-    #     return jsonify("acces denied")
+    if(current_user.administrator==False):
+        return jsonify("acces denied")
     ongoing= db.session.query(GameSession)
     for i in ongoing:
         db.session.delete(i) 
@@ -63,8 +63,8 @@ def delete_game_sessions():
 @app.route("/delete_users")
 @login_required
 def delete_users():
-    # if(current_user.administrator==False):
-    #     return jsonify("acces denied")
+    if(current_user.administrator==False):
+        return jsonify("acces denied")
     db.session.query(User).delete()
     db.session.commit()
     return jsonify("deleted all users")

@@ -14,7 +14,6 @@ app.config.from_object(Config)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 login = LoginManager(app)
-#telling to the login manager the function to call when an unlogged user tries to take a look to a page that requires logging in
 login.login_view = 'login'
 
 

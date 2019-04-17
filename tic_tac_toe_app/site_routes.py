@@ -20,9 +20,8 @@ def before_request():
 @app.route('/index')
 @login_required
 def index():
-    posts = []
-    app.logger.info('index')
-    return render_template('index.html', title='Home', posts=posts)
+    #app.logger.info('index')
+    return render_template('index.html', title='Home')
 
 
 @app.route('/login', methods=['GET', 'POST'])
